@@ -1,0 +1,44 @@
+distribute result [%0->$$14]
+-- DISTRIBUTE_RESULT  |UNPARTITIONED|
+  exchange 
+  -- ONE_TO_ONE_EXCHANGE  |UNPARTITIONED|
+    aggregate [$$14] <- [function-call: asterix:agg-global-avg, Args:[%0->$$18]]
+    -- AGGREGATE  |UNPARTITIONED|
+      exchange 
+      -- RANDOM_MERGE_EXCHANGE  |PARTITIONED|
+        aggregate [$$18] <- [function-call: asterix:agg-local-avg, Args:[%0->$$11]]
+        -- AGGREGATE  |PARTITIONED|
+          project ([$$11])
+          -- STREAM_PROJECT  |PARTITIONED|
+            assign [$$11] <- [function-call: asterix:string-length, Args:[function-call: asterix:field-access-by-index, Args:[%0->$$0, AInt32: {6}]]]
+            -- ASSIGN  |PARTITIONED|
+              project ([$$0])
+              -- STREAM_PROJECT  |PARTITIONED|
+                select (function-call: algebricks:and, Args:[function-call: algebricks:ge, Args:[%0->$$15, ADateTime: { 2014-01-01T00:00:00.000Z }], function-call: algebricks:lt, Args:[%0->$$15, ADateTime: { 2014-04-01T00:00:00.000Z }]])
+                -- STREAM_SELECT  |PARTITIONED|
+                  assign [$$15] <- [function-call: asterix:field-access-by-index, Args:[%0->$$0, AInt32: {2}]]
+                  -- ASSIGN  |PARTITIONED|
+                    project ([$$0])
+                    -- STREAM_PROJECT  |PARTITIONED|
+                      exchange 
+                      -- ONE_TO_ONE_EXCHANGE  |PARTITIONED|
+                        unnest-map [$$16, $$0] <- function-call: asterix:index-search, Args:[AString: {MugshotMessages}, AInt32: {0}, AString: {TinySocial}, AString: {MugshotMessages}, ABoolean: {false}, ABoolean: {false}, AInt32: {1}, %0->$$22, AInt32: {1}, %0->$$22, TRUE, TRUE, FALSE]
+                        -- BTREE_SEARCH  |PARTITIONED|
+                          exchange 
+                          -- ONE_TO_ONE_EXCHANGE  |PARTITIONED|
+                            order (ASC, %0->$$22) 
+                            -- STABLE_SORT [$$22(ASC)]  |PARTITIONED|
+                              exchange 
+                              -- ONE_TO_ONE_EXCHANGE  |PARTITIONED|
+                                project ([$$22])
+                                -- STREAM_PROJECT  |PARTITIONED|
+                                  exchange 
+                                  -- ONE_TO_ONE_EXCHANGE  |PARTITIONED|
+                                    unnest-map [$$21, $$22] <- function-call: asterix:index-search, Args:[AString: {msTimestampIdx}, AInt32: {0}, AString: {TinySocial}, AString: {MugshotMessages}, ABoolean: {false}, ABoolean: {false}, AInt32: {1}, %0->$$19, AInt32: {1}, %0->$$20, TRUE, FALSE, FALSE]
+                                    -- BTREE_SEARCH  |PARTITIONED|
+                                      exchange 
+                                      -- ONE_TO_ONE_EXCHANGE  |PARTITIONED|
+                                        assign [$$19, $$20] <- [ADateTime: { 2014-01-01T00:00:00.000Z }, ADateTime: { 2014-04-01T00:00:00.000Z }]
+                                        -- ASSIGN  |PARTITIONED|
+                                          empty-tuple-source
+                                          -- EMPTY_TUPLE_SOURCE  |PARTITIONED|

@@ -1,0 +1,37 @@
+\chapter{Related Work}
+\label{ch:foundations}
+
+In this chapter, we describe existing systems and research related to Big Data systems. Hyracks builds upon prior work in the area of Parallel Database systems and Data-Intensive computing. We start by providing a brief history of Parallel Database systems, followed by and overview of Data-Intensive computing systems.
+
+\section{Parallel Database Systems}
+
+The period from the early 80s to the mid-90s of the previous century saw a flurry of work in the area of parallel database systems, both in the research community as well as in industry. The Gamma Database Machine Project~\cite{GammaVLDB,GammaTKDE} was a parallel database research project that was developed at the University of Wisconsin, Madison. Gamma was based on a shared-nothing architecture consisting of a number of a number of processors connected to each other by a communication network. The shared-nothing architecture showed promise of being scalable to 1000s of nodes. Gamma applied partitioned-parallel techniques to process SQL queries over relational data. They used hash-based parallel algorithms owing to their theoretical infinite scalability due to the lack of a need for centralized control. Gamma's predecessor, DIRECT~\cite{DBLP:journals/tse/BoralDFJW82}, had shown that centralized control was an impediment to scalability.
+
+Around the same timeframe as Gamma, the GRACE Database Machine project~\cite{GRACE} was being developed at the University of Tokyo, in Japan. The GRACE machine performed parallel query processing using a combination of hashing and sorting. The Grace hash join was a by-product of this project.
+
+Teradata~\cite{Teradata} was an industrial parallel database, also based on the shared-nothing architecture, that used principles similar to Gamma and the GRACE projects. In the early 90s, Teradata was already shipping parallel database systems that scaled to around 200 processors.
+
+In \cite{DewittGrayPDB}, DeWitt and Gray provide an excellent summary of parallelization techniques that have been successfully used by parallel database systems to achieve very high scalability.
+
+\section{Data-Intensive Computing Systems}
+
+The area of data-intensive computing was kick-started by the introduction of the MapReduce~\cite{mapreduce} system by Google. MapReduce provided a simple programming abstraction for developers to build data-processing tools that could process massive quantities of data distributed across thousands of machines. The MapReduce platform assumes that data is organized as files that are split into blocks and stored in a distributed filesystem (such as the Google Filesystem~\cite{GFS-Paper}). The MapReduce model allows programmers to express data processing tasks by implementing a combination of Map and Reduce functions. The infrastructure then applies these functions in parallel to large quantities of data to achieve the final result. For example, if one was interested in counting the number of unique words in a large number of text files, they would write a Map function that scanned through the lines of the text file to tokenize each line into words and produce (<word>, 1) pairs. The MapReduce contract guarantees that the provided Map function is invoked on each file provided as input to the process. The infrastructure then sorts the output of the Map function on the key (the word, in our word-count example), and uses a hash function to create a large number of partitions of the (<word>, 1) pairs. The corresponding partitions produced by each Map function invocation are merged to form the input to the Reduce functions, while maintaining the sorted property of the key. In the word-count example, the Reduce function would be implemented to accept (<word>, count) pairs and add up the counts of successive entries that have the same word value, thereby producing the final number of occurrences of each word in the input documents. Since MapReduce targeted clusters of cheap commodity machines, fault-tolerance was an important requirement. MapReduce achieved fault-tolerance through repeated execution of failed Map and Reduce function invocations. Due to its simplicity in enabling data-parallel computing in a fault-tolerant manner, it was quickly adopted by the open-source community to create the Hadoop~\cite{hadoop} platform. 
+
+Microsoft introduced Dryad~\cite{Isard:2007kx}, a generalized data-parallel computing platform which abstracted processing in the form of vertices and edges. Dryad allowed the programmer to instantiate an arbitrary graph of these vertices and edges and run them in a fault-tolerant, parallel manner on a cluster of commodity machines.
+
+Nephele/PACTS~\cite{NephelePACTs}, now renamed to Apache Flink, was a research system that extended the MapReduce model to add other second-order operators, such as Match, Cross, and Co-group, while still preserving the Map and Reduce operators.
+
+Spark~\cite{DBLP:conf/hotcloud/ZahariaCFSS10} is a Big Data processing platform that is built around the concept of Reliable Distributed Datasets (RDDs). RDDs model datasets that are partitioned and distributed across the cluster. These data partitions could either represent data stored on a distributed filesystem or data that is pinned in memory. The Spark infrastructure manages these RDDs and guarantees that they are reliably available to the processing layer, by recomputing partitions, if necessary. Spark has achieved quite some success over the past few years as a dominant data-parallel compute platform in the Hadoop stack. In recent years, it has replaced the Hadoop MapReduce layer for Big Data processing.
+
+\section{Extensible Database Systems}
+
+There have been a number of research projects over the last several decades that have focused on developing extensible database frameworks so that system developers can assemble a full-fledged database system by putting together pre-built components instead of starting from scratch.
+Genesis~\cite{Batory:1986:GPD:318826.318854} investigated the feasibility of decomposing database systems into smaller reusable components. 
+
+Integration of abstract data types into database systems~\cite{Stonebraker86} was a first step into achieving data model extensibility.
+EXODUS~\cite{Carey:1986:AEE:318826.318839} was a system built in an era of object-oriented databases when there was heavy experimentation at the language and data model levels. 
+The high-level goal of EXODUS was to provide a general configurable tool-set to build data management systems efficiently. 
+In this regard, the goals of this work are similar to those of EXODUS. However, EXODUS was not designed with the aim to parallelize queries.
+The EXODUS optimizer generator~\cite{Graefe:1987:EOG:38714.38734} was built as part of the EXODUS project to provide an extensible optimizer generator. 
+System designers could use its extensibility to implement their own equivalence rules that the rewriter applied to enumerate query plans, much like the rewrite rule system in Algebricks. 
+Volcano~\cite{journals/tkde/Graefe94} and Cascades~\cite{Cascades} took the work from EXODUS further by adding support for parallelism.

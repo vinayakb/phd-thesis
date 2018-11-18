@@ -1,0 +1,10 @@
+{ "message-id":1, "author-id":3, "timestamp":datetime("2014-02-20T12:10:00"), "sender-location":point("47.16, 77.75"), "tags":{{ "Margarita", "Isbel", "Von" }}, "message":"Having lunch with @Margarita, @Isbel, and @Von." }
+{ "message-id":2, "author-id":7, "timestamp":datetime("2014-02-20T12:12:00"), "in-response-to":1, "sender-location":point("41.66, 80.87"), "tags":{{ "Von" }}, "message":"Haven't seen @Isbel in ages. Say hello!" }
+{ "message-id":3, "author-id":3, "timestamp":datetime("2014-02-20T12:12:30"), "in-response-to":2, "sender-location":point("47.16, 77.75"), "tags":{{ "Woodrow" }}, "message":"Sure. How's @Woodrow?" }
+{ "message-id":4, "author-id":7, "timestamp":datetime("2014-02-20T12:14:00"), "in-response-to":3, "sender-location":point("41.66, 80.87"), "tags":{{ "Nicholas", "Bram" }}, "message":"Hanging out with @Nicholas and @Bram" }
+{ "message-id":5, "author-id":8, "timestamp":datetime("2014-02-20T12:18:00"), "in-response-to":1, "sender-location":point("34.7, 90.76"), "tags":{{  }}, "message":"looks great!" }
+{ "message-id":6, "author-id":6, "timestamp":datetime("2014-02-20T17:30:00"), "sender-location":point("31.5, 75.56"), "tags":{{ "Nila", "Von" }}, "message":"Going to the game tonite with @Nila and @Von." }
+{ "message-id":7, "author-id":4, "timestamp":datetime("2014-02-20T17:40:00"), "in-response-to":6, "sender-location":point("32.91, 85.05"), "tags":{{  }}, "message":"Have fun!" }
+{ "message-id":8, "author-id":1, "timestamp":datetime("2014-02-20T18:10:00"), "sender-location":point("40.33, 80.87"), "tags":{{ "Emory", "Isbel" }}, "message":"Great dinner with @Emory and @Isbel yesterday." }
+{ "message-id":9, "author-id":7, "timestamp":datetime("2014-02-20T18:12:00"), "in-response-to":8, "sender-location":point("34.45, 96.48"), "tags":{{  }}, "message":"Which place is this?" }
+{ "message-id":10, "author-id":1, "timestamp":datetime("2014-02-20T18:13:30"), "in-response-to":9, "sender-location":point("40.33, 80.87"), "tags":{{  }}, "message":"Amici's on Washington and Broadway" }

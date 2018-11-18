@@ -1,0 +1,268 @@
+\newcommand{\eat}[1]{}
+\newcommand{\codepiece}[1]{\texttt{\small #1}}
+%% Prelim chapter
+\usepackage{listings}
+
+\urlstyle{same}
+
+% configuration for listings
+\definecolor{light-gray}{gray}{0.98}
+\definecolor{dark-gray}{gray}{0.5}
+\lstset{frame=single, backgroundcolor=\color{light-gray}, basicstyle=\ttfamily\scriptsize
+}
+\lstMakeShortInline^
+
+\def\aroundlstskip{0ex}
+\lstdefinestyle{noskip}{aboveskip=\aroundlstskip,belowskip=\aroundlstskip,abovecaptionskip=\aroundlstskip,belowcaptionskip=\aroundlstskip}
+\lstnewenvironment{code}{}{}
+
+\newcommand{\citeurl}[1]{{\scriptsize \textsf{#1}}}
+
+\lstdefinelanguage{AQL}{
+  alsoletter={-"'_:\$[]()0123456789\\},
+  morekeywords={
+    for,
+    let,
+    in,
+    return,
+    where,
+    group,
+    by,
+    with,
+    order,
+    desc,
+    asc,
+    limit,
+    replace,
+    delete,
+    insert,
+    into,
+    some,
+    every,
+    satisfies,
+    and,
+    or,
+    use,
+    dataverse,
+    set,
+    simfunction,
+    simthreshold,
+    create,
+    index,
+    type,
+    fuzzy,
+    keyword,
+    NGram,
+    rtree
+  },
+  basicstyle=\sf,
+  keywordstyle=\textbf,
+  identifierstyle=\texttt,
+  commentstyle=\textit,
+  literate={<=}{{\litleq}}1 {>=}{{\litgeq}}1,
+  literate={~=}{$\sim{}=$}1 % set tilde as a literal (no process)
+}[keywords,comments,strings]
+
+\lstdefinelanguage{AQLSchema}{
+  alsoletter={-"'_:(\$\\},
+  morekeywords={
+    use,
+    declare,
+    type,
+    as,
+    open,
+    closed,
+    dataset,
+    dataverse,
+    nodegroup,
+    on,
+    partitioned,
+    by,
+    primary,
+    key,
+    create,
+    index,
+    int32,
+    string,
+    datetime,
+    double,
+    date,
+    point,
+    with,
+    filter
+  },
+  basicstyle=\sf,
+  keywordstyle=\textbf,
+  identifierstyle=\texttt,
+  commentstyle=\textit,
+  literate={<=}{{\litleq}}1 {>=}{{\litgeq}}1
+}[keywords,comments,strings]
+
+
+\lstdefinelanguage{AQLSchema2}{
+  alsoletter={-"'_:(\$\\},
+  morekeywords={
+    use,
+    declare,
+    type,
+    as,
+    open,
+    closed,
+    dataset,
+    dataverse,
+    nodegroup,
+    on,
+    partitioned,
+    by,
+    primary,
+    key,
+    create,
+    index,
+    int32,
+    string,
+    datetime,
+    double,
+    date,
+    point,
+    with,
+    filter,
+    TwitterUserType
+  },
+  basicstyle=\sf,
+  keywordstyle=\textbf,
+  identifierstyle=\texttt,
+  commentstyle=\textit,
+  literate={<=}{{\litleq}}1 {>=}{{\litgeq}}1
+}[keywords,comments,strings]
+
+\lstnewenvironment{aql}
+   {\lstset{language=AQL,columns=space-flexible,basicstyle=\small,basewidth={.5em,.5em}}}
+   {}
+
+\lstnewenvironment{aqlscriptsize}
+   {\lstset{language=AQL,columns=space-flexible,basicstyle=\scriptsize,basewidth={.5em,.5em},numbers=left}}
+   {}
+
+\lstnewenvironment{aqltiny}
+   {\lstset{language=AQL,columns=space-flexible,basicstyle=\tiny,basewidth={.5em,.5em},numbers=left}}
+   {}
+
+\lstnewenvironment{aqlschema}
+   {\lstset{language=AQLSchema,columns=space-flexible,basicstyle=\small,basewidth={.5em,.5em}}}
+   {}
+   
+\lstnewenvironment{aqlschema2}
+   {\lstset{language=AQLSchema2,columns=space-flexible,basicstyle=\small,basewidth={.5em,.5em}}}
+   {}
+
+\lstdefinelanguage{SQL}{%
+  alsoletter={-_:(\$\\},
+  morekeywords={
+    select,
+    from,
+    where,
+    and,
+    or,
+    in,
+    as,
+    group,
+    by,
+    join,
+    on,
+    with,
+    update,
+    set,
+    delete,
+    insert
+  },
+  basicstyle=\sf,
+  keywordstyle=\textbf,
+  identifierstyle=\texttt,
+  commentstyle=\textit,
+  literate={<=}{{\litleq}}1 {>=}{{\litgeq}}1 {//}{{\litdoubleslash}}1 %%{::}{{\litdoublecolon}}1%
+}[keywords,comments,strings]
+
+
+\lstnewenvironment{sql}
+   {\lstset{language=SQL,columns=flexible,basicstyle=\footnotesize,basewidth={.3em,.2em}}}
+   {}
+
+
+\lstdefinelanguage{SQLSchema}{
+  alsoletter={-"'_:(\$\\},
+  morekeywords={
+    CREATE,
+    TABLE,
+    INTEGER,
+    CHAR,
+    VARCHAR
+  },
+  basicstyle=\sf,
+  keywordstyle=\textbf,
+  identifierstyle=\texttt,
+  commentstyle=\textit,
+  literate={<=}{{\litleq}}1 {>=}{{\litgeq}}1
+}[keywords,comments,strings]
+
+\lstnewenvironment{sqlschema}
+   {\lstset{language=SQLSchema,columns=flexible,basicstyle=\scriptsize,basewidth={.5em,.5em}}}
+   {}
+
+\lstdefinelanguage{Java}{
+  alsoletter={-"'_},
+  morekeywords={
+    public,
+    interface,
+    for,
+    while
+    return.
+    class
+  },
+  basicstyle=\sf,
+  keywordstyle=\textbf,
+  identifierstyle=\texttt,
+  commentstyle=\textit,
+}[keywords,comments,strings]
+
+\lstnewenvironment{java}
+   {\lstset{language=Java,columns=flexible,basicstyle=\scriptsize,tabsize=4,basewidth={.3em,.2em}}}
+   {}
+
+
+\newlength{\columnfigurewidth}
+\setlength{\columnfigurewidth}{\columnwidth}
+
+\newcounter{ddlcnt}
+\lstnewenvironment{ddl}[2][]{
+  \renewcommand{\lstlistingname}{Data definition}
+  \setcounter{lstlisting}{\value{ddlcnt}}
+  \lstset{style=noskip,captionpos=b,float=h!t,caption=#1,label=#2}
+}{
+  \addtocounter{ddlcnt}{1}
+}
+
+\newcounter{querycnt}
+\lstnewenvironment{query}[2][]{
+  \renewcommand{\lstlistingname}{Query}
+  \setcounter{lstlisting}{\value{querycnt}}
+  \lstset{style=noskip,captionpos=b,float=h!t,caption=#1,label=#2}
+}{
+  \addtocounter{querycnt}{1}
+}
+
+\newcounter{updatecnt}
+\lstnewenvironment{update}[2][]{
+  \renewcommand{\lstlistingname}{Update}
+  \setcounter{lstlisting}{\value{updatecnt}}
+  \lstset{style=noskip,captionpos=b,float=h!t,caption=#1,label=#2}
+}{
+  \addtocounter{updatecnt}{1}
+}
+
+\newcommand{\flwor}{\textsl{\textbackslash'fla$\dot{\mbox{u}}$(-\textreve)r\textbackslash}}
+
+\newcommand{\TODO}[1] {\textbf{TODO \textsc{#1}}}
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+

@@ -1,0 +1,151 @@
+% This is a template for Ph.D. dissertations in the UCI format.
+
+% All fonts, including those for sub- and superscripts, must be 10 points or larger.
+% Recommended sizes are 14-point for chapter headings, 12-point for the main body of text
+% and figure/table titles, and 10-point for footnotes, sub- and super-scripts, and text in
+% figures and tables.
+\documentclass[12pt,fleqn]{ucithesis}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{alltt}
+\usepackage{paralist}
+\usepackage{listings}
+\usepackage{times}
+\usepackage{clrscode}
+\usepackage{ccaption}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{boxedminipage}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{path}
+\usepackage{psfrag}
+\usepackage{relsize}
+\usepackage{mdwtab}
+\usepackage{subfigure}
+%\usepackage[ruled]{algorithm2e}
+\usepackage{epsfig}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{graphics}
+\usepackage{epstopdf}
+\usepackage{url}
+
+\usepackage{xr}
+\usepackage{courier}
+
+\usepackage{alltt}
+\usepackage{graphicx}
+\usepackage{color}
+
+
+
+% plainpages=false fixes the "duplicate ignored" error with page counters
+% Set pdfborder to 0 0 0 to disable colored borders around PDF hyperlinks
+% Use linktocpage=true to avoid figure captions not being split properly.
+\usepackage[plainpages=false,pdfborder={0 0 0},linktocpage=true]{hyperref}
+\usepackage{breakurl}
+
+% Uncomment the following line to enable Unicode support. This will allow you
+% to enter non-ASCII characters (such as accented characters) directly without
+% having to use LaTeX's awkward escape syntax (e.g., \'{e})
+% NOTE: You may have to install the ucs.sty package for this to work. See:
+% http://www.unruh.de/DniQ/latex/unicode/
+% \usepackage[utf8x]{inputenc}
+
+\setcounter{secnumdepth}{3}
+%\setcounter{tocdepth}{3}
+
+\newcommand{\ttfont}[1]{\ensuremath{\tt{#1}}}
+\newcommand{\ed}{\ensuremath{\sf{ed}}}
+
+\newcommand{\thickhline}{\noalign{\hrule height 0.8pt}}
+
+\input{macros}
+
+\begin{document}
+
+\thesistitle {
+An Efficient Foundation for Big Data Processing on Modern Clusters
+}
+
+\degreename{Doctor of Philosophy}
+
+% Use the wording given in the official list of degrees awarded by UCI:
+% http://www.rgs.uci.edu/grad/academic/degrees_offered.htm
+\degreefield{Information and Computer Science}
+
+% Your name as it appears on official UCI records.
+\authorname{Vinayak Borkar}
+
+% Use the full name of each committee member.
+\committeechair{Professor Michael J. Carey}
+\othercommitteemembers
+{
+Professor Chen Li \\
+Professor Sharad Mehrotra \\
+Professor Vassilis Tsotras
+}
+
+\degreeyear{2016}
+
+\copyrightdeclaration
+{
+{\copyright} {\Degreeyear} \Authorname
+}
+
+% If you have previously published parts of your manuscript, you must list the
+% copyright holders; see Section 3.2 of the UCI Thesis and Dissertation Manual.
+% Otherwise, this section may be omitted.
+\prepublishedcopyrightdeclaration
+{
+Portions of Chapter 3 {\copyright} 2011 IEEE \\
+Portions of Chapter 4 {\copyright} 2015 ACM \\
+Portions of Chapter 5 {\copyright} 2014 VLDB Endowment \\
+All other materials {\copyright} 2016 \Authorname
+}
+
+% The dedication page is optional.
+%\dedications {
+%}
+
+\acknowledgments {
+This thesis would not have been possible but for the constant encouragement from my advisor, Dr. Michael J. Carey. It has been an ongoing effort from his side for the past twelve years to have me pursue a PhD. degree.
+
+Since 2009, when I started working on Hyracks, I have had the opportunity to work with some of the smartest people, both in and out of academia, who have shaped the work I did as well as my approach to technical problems. During my tenure at UCI, I realized that building a robust system involving close to half a million lines of code is not an easy feat and would not have been possible without the conviction and sacrifices made by all involved. I would like to thank Dr. Michael Carey, Dr. Chen Li, and Dr. Vassilis Tsotras for being part of the AsterixDB effort, and allowing their students to spend an enormous amount of time to develop the AsterixDB codebase, even though that work would not directly translate to published papers.
+
+I would like to thank Yingyi Bu, Preston Carman Jr., Raman Grover, Nicola Onose, Pouria Pirzadeh, Rares Vernica, and Till Westmann for being my co-conspirators in the Hyracks and Algebricks efforts.
+
+AsterixDB has been the work of many people over the last several years. Sattam Alsubaiee, Alex Behm, Khurram Faraaz, Raman Grover, Zachary Heilbron, Young-Seok Kim, Nicola Onose, Rares Vernica, and Till Westmann were instrumental in building and maintaining large parts of the AsterixDB codebase. I have benefited from valuable discussions with them during my tenure at UCI.
+
+I would like to specially thank Tyson Condie for building the Overlog platform that helped us to quickly prototype parts of Hyracks. Tyson was also instrumental in connecting us with Chris Jermaine and his students, who at that time were looking for a platform to experiment with online-aggregation. Hyracks turned out to be a good fit for that work. While at Yahoo Research, Tyson helped us to get access to a 180-node cluster to scale-test Hyracks.
+
+The data team at Facebook was very generous in awarding me a Facebook Fellowship for my work on Hyracks and then providing me access to their Hive cluster. Working on their cluster gave me a lot of insight into some of the real challenges involved in running a Big Data environment. I am very grateful to them for this opportunity.
+
+Last, but not least, I would like to thank my family for letting me pursue this work for such a long period of time, finally to its completion.
+}
+
+\include{cv}
+\include{abstract}
+
+\preliminarypages
+
+\include{intro}
+\include{preliminaries}
+\include{hyracks}
+\include{algebricks}
+\include{asterixdb}
+\include{conclusion}
+
+% These commands fix an odd problem in which the bibliography line
+% of the Table of Contents shows the wrong page number.
+\clearpage
+\phantomsection
+
+\bibliographystyle{abbrv}
+\bibliography{bibliography,references}
+
+\appendix
+
+\end{document}
